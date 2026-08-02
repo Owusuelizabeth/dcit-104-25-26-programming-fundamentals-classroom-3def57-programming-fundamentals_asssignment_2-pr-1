@@ -36,4 +36,39 @@
 
 #include <iostream>
 using namespace std;
+#include <iostream>
+#include <cmath>
+
+// Function to check if a number is prime
+bool is_prime(int n) {
+    // Numbers less than 2 are NOT prime
+    if (n < 2) {
+        return false;
+    }
+    
+    // Check for factors from 2 up to the square root of n
+    for (int i = 2; i <= std::sqrt(n); i++) {
+        if (n % i == 0) {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+// Main execution block
+int main() {
+    int num;
+    std::cout << "Enter a number: ";
+    std::cin >> num;
+
+    if (is_prime(num)) {
+        std::cout << num << " is a prime number." << std::endl;
+    } else {
+        std::cout << num << " is NOT a prime number." << std::endl;
+    }
+
+    return 0;
+}
+
 
