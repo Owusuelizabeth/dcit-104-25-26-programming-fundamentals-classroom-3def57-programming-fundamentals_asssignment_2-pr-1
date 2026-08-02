@@ -81,5 +81,58 @@
 #include <vector>
 #include <string>
 #include <iomanip>
-using namespace std;
+using namespace std;#include <iostream>
+#include <vector>
+#include <numeric>
+#include <iomanip>
+
+struct Student {
+    std::string name, id;
+    std::vector<double> scores;
+};
+
+double getAvg(const std::vector<double>& s) {
+    return s.empty() ? 0 : std::accumulate(s.begin(), s.end(), 0.0) / s.size();
+}
+
+int main() {
+    std::vector<Student> students;
+    int choice;
+
+    while (true) {
+        std::cout << "\n1.Add  2.Display  3.Avg  4.Quit\nChoice: ";
+        if (!(std::cin >> choice) || choice == 4) break;
+
+        if (choice == 1) {
+            Student s;
+            std::cout << "Name: "; std::cin >> std::ws; std::getline(std::cin, s.name);
+            std::cout << "ID: "; std::cin >> s.id;
+            int n; std::cout << "Scores count: "; std::cin >> n;
+            s.scores.resize(n);
+            for (int i = 0; i < n; ++i) { std::cout << "Score " << i + 1 << ": "; std::cin >> s.scores[i]; }
+            students.push_back(s);
+            std::cout << "Added!\n";
+        } 
+        else if (choice == 2) {
+            if (students.empty()) { std::cout << "No students.\n"; continue; }
+            for (const auto& s : students) {
+                std::cout << s.name << " | " << s.id << " | Scores: ";
+                for (double sc : s.scores) std::cout << sc << " ";
+                std::cout << "| Avg: " << std::fixed << std::setprecision(2) << getAvg(s.scores) << "\n";
+            }
+        } 
+        else if (choice == 3) {
+            std::string id; std::cout << "Enter ID: "; std::cin >> id;
+            bool found = false;
+            for (const auto& s : students) {
+                if (s.id == id) {
+                    std::cout << s.name << " Avg: " << std::fixed << std::setprecision(2) << getAvg(s.scores) << "\n";
+                    found = true; break;
+                }
+            }
+            if (!found) std::cout << "ID not found.\n";
+        }
+    }
+}
+
 
