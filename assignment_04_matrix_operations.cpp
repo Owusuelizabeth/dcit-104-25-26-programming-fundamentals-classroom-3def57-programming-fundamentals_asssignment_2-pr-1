@@ -64,4 +64,59 @@
 #include <iomanip>
 #include <string>
 using namespace std;
+#include <iostream>
+#include <vector>
+
+using Matrix = std::vector<std::vector<int>>;
+
+Matrix transposeMatrix(const Matrix& matrix) {
+    int rows = matrix.size();
+    int cols = matrix[0].size();
+    Matrix transposed(cols, std::vector<int>(rows));
+
+    for (int j = 0; j < cols; ++j) {
+        for (int i = 0; i < rows; ++i) {
+            transposed[j][i] = matrix[i][j];
+        }
+    }
+    return transposed;
+}
+
+Matrix addMatrices(const Matrix& matA, const Matrix& matB) {
+    int rows = matA.size();
+    int cols = matA[0].size();
+    Matrix result(rows, std::vector<int>(cols));
+
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            result[i][j] = matA[i][j] + matB[i][j];
+        }
+    }
+    return result;
+}
+
+Matrix multiplyMatrices(const Matrix& matA, const Matrix& matB) {
+    int rowsA = matA.size();
+    int colsA = matA[0].size();
+    int colsB = matB[0].size();
+    Matrix result(rowsA, std::vector<int>(colsB, 0));
+
+    for (int i = 0; i < rowsA; ++i) {
+        for (int j = 0; j < colsB; ++j) {
+            for (int k = 0; k < colsA; ++k) {
+                result[i][j] += matA[i][k] * matB[k][j];
+            }
+        }
+    }
+    return result;
+}
+
+void printMatrix(const Matrix& matrix) {
+    for (const auto& row : matrix) {
+        for (int val : row) {
+            std::cout << val << " ";
+        }
+        std::cout << "\n";
+    }
+}
 
