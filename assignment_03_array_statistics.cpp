@@ -36,7 +36,54 @@
 
 //
 // =============================================================================
-// YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
+// YOUR CODE BELOW — 
+#include <iostream>
+
+double getSum(const double arr[], int n) {
+    double sum = 0;
+    for (int i = 0; i < n; i++) sum += arr[i];
+    return sum;
+}
+
+double getAvg(const double arr[], int n) {
+    return getSum(arr, n) / n;
+}
+
+double getMax(const double arr[], int n) {
+    double max = arr[0];
+    for (int i = 1; i < n; i++) if (arr[i] > max) max = arr[i];
+    return max;
+}
+
+double getMin(const double arr[], int n) {
+    double min = arr[0];
+    for (int i = 1; i < n; i++) if (arr[i] < min) min = arr[i];
+    return min;
+}
+
+int main() {
+    int n;
+    std::cout << "How many numbers? ";
+    std::cin >> n;
+
+    if (n <= 0) return 1;
+
+    double* arr = new double[n];
+    for (int i = 0; i < n; i++) {
+        std::cout << "Enter number " << (i + 1) << ": ";
+        std::cin >> arr[i];
+    }
+
+    std::cout << "\nResults:\n";
+    std::cout << "Sum:      " << getSum(arr, n) << "\n";
+    std::cout << "Average:  " << getAvg(arr, n) << "\n";
+    std::cout << "Maximum:  " << getMax(arr, n) << "\n";
+    std::cout << "Minimum:  " << getMin(arr, n) << "\n";
+
+    delete[] arr;
+    return 0;
+}
+
 // =============================================================================
 
 #include <iostream>
