@@ -72,4 +72,93 @@
 #include <iomanip>
 #include <cmath>
 using namespace std;
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
+using namespace std;
+
+int main() {
+    int choice;
+
+    while (true) {
+        cout << "=================================" << endl;
+        cout << "        SIMPLE CALCULATOR        " << endl;
+        cout << "=================================" << endl;
+        cout << "1. Addition" << endl;
+        cout << "2. Subtraction" << endl;
+        cout << "3. Multiplication" << endl;
+        cout << "4. Division" << endl;
+        cout << "5. Modulus" << endl;
+        cout << "6. Exponentiation" << endl;
+        cout << "7. Quit" << endl;
+        cout << "Select an operation (1-7): ";
+        
+        if (!(cin >> choice)) {
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cout << "Error: Invalid choice! Please select an option between 1 and 7.\n" << endl;
+            continue;
+        }
+
+        if (choice == 7) {
+            cout << "Goodbye!" << endl;
+            break;
+        }
+
+        if (choice < 1 || choice > 7) {
+            cout << "Error: Invalid choice! Please select an option between 1 and 7.\n" << endl;
+            continue;
+        }
+
+        double num1, num2;
+        cout << "Enter first number : ";
+        cin >> num1;
+        cout << "Enter second number: ";
+        cin >> num2;
+
+        double result;
+        string opSymbol;
+
+        switch (choice) {
+            case 1:
+                result = num1 + num2;
+                opSymbol = "+";
+                break;
+            case 2:
+                result = num1 - num2;
+                opSymbol = "-";
+                break;
+            case 3:
+                result = num1 * num2;
+                opSymbol = "*";
+                break;
+            case 4:
+                if (num2 == 0) {
+                    cout << "Error: Cannot divide by zero.\n" << endl;
+                    continue;
+                }
+                result = num1 / num2;
+                opSymbol = "/";
+                break;
+            case 5:
+                if (num2 == 0) {
+                    cout << "Error: Cannot divide by zero.\n" << endl;
+                    continue;
+                }
+                result = fmod(num1, num2);
+                opSymbol = "%";
+                break;
+            case 6:
+                result = pow(num1, num2);
+                opSymbol = "**";
+                break;
+        }
+
+        cout << fixed << setprecision(2);
+        cout << "Result: " << num1 << " " << opSymbol << " " << num2 << " = " << result << "\n" << endl;
+    }
+
+    return 0;
+}
 
