@@ -49,5 +49,55 @@
 // =============================================================================
 
 #include <iostream>
-using namespace std;
+using namespace #include <iostream>
+#include <vector>
+
+// Function for PART A
+void printFibonacci(int n) {
+    if (n <= 0) return;
+    
+    long long a = 0, b = 1;
+    std::cout << "Fibonacci sequence: ";
+    for (int i = 0; i < n; ++i) {
+        std::cout << a << (i == n - 1 ? "" : " ");
+        long long next = a + b;
+        a = b;
+        b = next;
+    }
+    std::cout << "\n";
+}
+
+// Function for PART B
+bool isFibonacci(long long num) {
+    if (num < 0) return false;
+    
+    long long a = 0, b = 1;
+    while (a < num) {
+        long long next = a + b;
+        a = b;
+        b = next;
+    }
+    return a == num;
+}
+
+int main() {
+    // PART A
+    int n;
+    std::cout << "How many terms? ";
+    std::cin >> n;
+    printFibonacci(n);
+
+    // PART B
+    long long num;
+    std::cout << "\nEnter a number to check: ";
+    std::cin >> num;
+    
+    if (isFibonacci(num)) {
+        std::cout << num << " is a Fibonacci number.\n";
+    } else {
+        std::cout << num << " is NOT a Fibonacci number.\n";
+    }
+
+    return 0;
+}
 
