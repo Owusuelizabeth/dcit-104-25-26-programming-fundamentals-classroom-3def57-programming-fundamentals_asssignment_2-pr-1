@@ -79,4 +79,71 @@
 #include <vector>
 #include <string>
 using namespace std;
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+vector<string> tasks;
+
+void addTask() {
+    string task;
+    cout << "Enter task: ";
+    cin.ignore();
+    getline(cin, task);
+    tasks.push_back(task);
+    cout << "Task added: \"" << task << "\"\n";
+}
+
+void viewTasks() {
+    if (tasks.empty()) {
+        cout << "No tasks in the list.\n";
+        return;
+    }
+    cout << "Your Tasks:\n";
+    for (size_t i = 0; i < tasks.size(); ++i) {
+        cout << i + 1 << ". " << tasks[i] << "\n";
+    }
+}
+
+void deleteTask() {
+    if (tasks.empty()) {
+        cout << "No tasks to delete.\n";
+        return;
+    }
+    viewTasks();
+    cout << "Enter task number to delete: ";
+    int num;
+    if (cin >> num && num >= 1 && num <= static_cast<int>(tasks.size())) {
+        string removed = tasks[num - 1];
+        tasks.erase(tasks.begin() + (num - 1));
+        cout << "Task \"" << removed << "\" has been removed.\n";
+    } else {
+        cin.clear();
+        cin.ignore(10000, '\n');
+        cout << "Invalid task number.\n";
+    }
+}
+
+int main() {
+    int choice = 0;
+    while (choice != 4) {
+        cout << "\n====================\n  TO-DO LIST MENU  \n====================\n"
+             << "1. Add task\n2. View tasks\n3. Delete task\n4. Quit\n";
+        cout << "Enter your choice (1-4): ";
+        cin >> choice;
+
+        if (choice == 1) addTask();
+        else if (choice == 2) viewTasks();
+        else if (choice == 3) deleteTask();
+        else if (choice == 4) cout << "Goodbye!\n";
+        else {
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cout << "Invalid choice.\n";
+        }
+    }
+    return 0;
+}
 
