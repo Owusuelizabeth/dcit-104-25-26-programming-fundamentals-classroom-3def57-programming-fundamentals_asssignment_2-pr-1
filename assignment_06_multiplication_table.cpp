@@ -55,5 +55,49 @@
 // =============================================================================
 
 #include <iostream>
-using namespace std;
+using namespace #include <iostream>
+#include <iomanip>
+#include <string>
+#include <limits>
 
+int get_positive_integer(const std::string& prompt) {
+    int val;
+    std::cout << prompt;
+    if (std::cin >> val) {
+        if (val > 0) return val;
+        std::cout << "Error: Input must be a positive integer.\n";
+    } else {
+        std::cout << "Error: Invalid input. Please enter a valid integer.\n";
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+    return -1;
+}
+
+void print_table(int num) {
+    std::cout << "\nMultiplication Table for " << num << ":\n";
+    for (int i = 1; i <= 12; ++i) {
+        std::cout << num << "  x  " << std::left << std::setw(2) << i << " =  " << (num * i) << "\n";
+    }
+}
+
+void part_a() {
+    int num = get_positive_integer("Enter a number: ");
+    if (num != -1) print_table(num);
+}
+
+void part_b() {
+    int n = get_positive_integer("Enter a number N: ");
+    if (n != -1) {
+        for (int i = 1; i <= n; ++i) {
+            print_table(i);
+            if (i < n) std::cout << "-------------\n";
+        }
+    }
+}
+
+int main() {
+    part_a();
+    // part_b();
+    return 0;
+}
